@@ -2,7 +2,7 @@
   "name": "kogan_task",
   "version": "1.0.0",
   "description": "Interview task for Kogan",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest"
   },
