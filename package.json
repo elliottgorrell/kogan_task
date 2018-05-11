@@ -1,0 +1,26 @@
+{
+  "name": "kogan_task",
+  "version": "1.0.0",
+  "description": "Interview task for Kogan",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliottgorrell/kogan_task.git"
+  },
+  "author": "Elliott Gorrell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elliottgorrell/kogan_task/issues"
+  },
+  "homepage": "https://github.com/elliottgorrell/kogan_task#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "jest": "^22.4.3"
+  }
+}
