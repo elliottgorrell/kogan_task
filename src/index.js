@@ -20,7 +20,26 @@ const getAllData = async () => {
   return data;
 };
 
+const getAllAirConditioners = async () => {
+  const products = await getAllData();
+  const airConditioners = products.filter(product => product.category === 'Air Conditioners');
+  return airConditioners;
+};
 
-getAllData()
+const getWeightOfProduct = (product, conversionFactor) => {
+  const volume = (product.size.length / 100) * (product.size.height / 100) * (product.size.width / 100);
+  return volume * conversionFactor;
+};
+
+const getAllAirConditionerWeights = async () => {
+  const aircons = await getAllAirConditioners();
+  return aircons.map(aircon => getWeightOfProduct(aircon, 250));
+};
+
+getAllAirConditioners()
+  .then(data => console.log(data))
+  .catch(e => console.error('Error:', e));
+
+getAllAirConditionerWeights()
   .then(data => console.log(data))
   .catch(e => console.error('Error:', e));
