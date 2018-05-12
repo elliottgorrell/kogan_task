@@ -35,5 +35,5 @@ const getAverageAirConditionerWeights = async () => {
 };
 
 getAverageAirConditionerWeights()
-  .then(data => console.log(data))
+  .then(data => console.log(`The total average weight of the airconditioners: ${data}`))
   .catch(e => console.error('Error:', e));
