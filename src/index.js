@@ -36,10 +36,16 @@ const getAllAirConditionerWeights = async () => {
   return aircons.map(aircon => getWeightOfProduct(aircon, 250));
 };
 
+const getAverageAirConditionerWeights = async () => {
+  const weights = await getAllAirConditionerWeights();
+  const totalWeight = weights.reduce((accumulator, currentValue) => accumulator + currentValue);
+  return totalWeight / weights.length;
+}
+
 getAllAirConditioners()
   .then(data => console.log(data))
   .catch(e => console.error('Error:', e));
 
-getAllAirConditionerWeights()
+  getAverageAirConditionerWeights()
   .then(data => console.log(data))
   .catch(e => console.error('Error:', e));
