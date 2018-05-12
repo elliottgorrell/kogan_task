@@ -5,34 +5,26 @@ const endpoint = axios.create({
   timeout: 3000,
 });
 
-const getDataFromEndpoint = async (route) => {
-  const response = await endpoint.get(route);
-  return response.data;
-};
-
 const getAllData = async () => {
-  let response = await getDataFromEndpoint('/api/products/1');
-  let data = response.objects;
-  while (response.next) {
-    response = await getDataFromEndpoint(response.next);
-    data = data.concat(response.objects);
+  let response = await endpoint.get('/api/products/1');
+  let data = response.data.objects;
+  while (response.data.next) {
+    response = await endpoint.get(response.data.next);
+    data = data.concat(response.data.objects);
   }
   return data;
 };
 
-const getAllAirConditioners = async () => {
-  const products = await getAllData();
-  const airConditioners = products.filter(product => product.category === 'Air Conditioners');
-  return airConditioners;
-};
-
 const getWeightOfProduct = (product, conversionFactor) => {
   const volume = (product.size.length / 100) * (product.size.height / 100) * (product.size.width / 100);
+
   return volume * conversionFactor;
 };
 
 const getAllAirConditionerWeights = async () => {
-  const aircons = await getAllAirConditioners();
+  const products = await getAllData();
+  const aircons = products.filter(product => product.category === 'Air Conditioners');
+
   return aircons.map(aircon => getWeightOfProduct(aircon, 250));
 };
 
@@ -40,12 +32,8 @@ const getAverageAirConditionerWeights = async () => {
   const weights = await getAllAirConditionerWeights();
   const totalWeight = weights.reduce((accumulator, currentValue) => accumulator + currentValue);
   return totalWeight / weights.length;
-}
+};
 
-getAllAirConditioners()
-  .then(data => console.log(data))
-  .catch(e => console.error('Error:', e));
-
-  getAverageAirConditionerWeights()
+getAverageAirConditionerWeights()
   .then(data => console.log(data))
   .catch(e => console.error('Error:', e));
